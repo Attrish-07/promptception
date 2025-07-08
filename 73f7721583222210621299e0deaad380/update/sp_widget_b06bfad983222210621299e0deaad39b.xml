@@ -47,18 +47,26 @@
         <sys_updated_by>admin</sys_updated_by>
         <sys_updated_on>2025-07-04 14:18:04</sys_updated_on>
         <template><![CDATA[
-<div>
-  <h2>Prompts Displayed on Portal</h2>
-  <ul style="list-style: none; padding: 0;">
-    <li ng-repeat="prompt in data.prompts" style="margin-bottom: 1.5em; padding: 1em; border-radius: 8px; background: #f8f9fa; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-      <div style="font-size: 2em; font-weight: bold; color: #2d3748;">{{prompt.number}}</div>
-      <div style="margin-top: 0.5em;"><strong>User Input:</strong> {{prompt.user_input}}</div>
-      <div><strong>Expanded Prompt:</strong> {{prompt.expanded_prompt}}</div>
-      <div><strong>Submitter:</strong> {{prompt.submitter}}</div>
-    </li>
-  </ul>
-  <div ng-if="!data.prompts.length">No prompts to display.</div>
-</div>
-]]></template>
+        <style>
+          .prompt-card {
+            transition: background 0.2s;
+          }
+          .prompt-card:hover {
+            background: #e2e8f0 !important;
+          }
+        </style>
+        <div>
+          <h2>Prompts Displayed on Portal</h2>
+          <ul style="list-style: none; padding: 0;">
+            <li class="prompt-card" ng-repeat="prompt in data.prompts" style="margin-bottom: 1.5em; padding: 1em; border-radius: 8px; background: #f8f9fa; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+              <div style="font-size: 2em; font-weight: bold; color: #2d3748;">{{prompt.number}}</div>
+              <div style="margin-top: 0.5em;"><strong>User Input:</strong> {{prompt.user_input}}</div>
+              <div><strong>Expanded Prompt:</strong> {{prompt.expanded_prompt}}</div>
+              <div><strong>Submitter:</strong> {{prompt.submitter}}</div>
+            </li>
+          </ul>
+          <div ng-if="!data.prompts.length">No prompts to display.</div>
+        </div>
+        ]]></template>
     </sp_widget>
 </record_update>
