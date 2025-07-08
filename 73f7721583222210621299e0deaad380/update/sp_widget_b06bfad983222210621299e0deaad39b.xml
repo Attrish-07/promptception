@@ -17,7 +17,21 @@
         <option_schema/>
         <public>false</public>
         <roles/>
-        <script><![CDATA[(function() {  /* populate the 'data' object */  /* e.g., data.table = $sp.getValue('table'); */})();]]></script>
+        <script><![CDATA[(function() {
+  // Query the x_1086142_promptce_prompt table for records where display_on_portal is true
+  var gr = new GlideRecord('x_1086142_promptce_prompt');
+  gr.addQuery('display_on_portal', true);
+  gr.query();
+  data.prompts = [];
+  while (gr.next()) {
+    data.prompts.push({
+      sys_id: gr.getValue('sys_id'),
+      name: gr.getValue('name'),
+      label: gr.getValue('label'),
+      // Add other fields as needed
+    });
+  }
+})();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>admin</sys_created_by>
@@ -31,6 +45,16 @@
         <sys_update_name>sp_widget_b06bfad983222210621299e0deaad39b</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
         <sys_updated_on>2025-07-04 14:18:04</sys_updated_on>
-        <template><![CDATA[<div><!-- your widget template --></div>]]></template>
+        <template><![CDATA[
+<div>
+  <h2>Prompts Displayed on Portal</h2>
+  <ul>
+    <li ng-repeat="prompt in data.prompts">
+      <strong>{{prompt.label}}</strong> ({{prompt.name}})
+    </li>
+  </ul>
+  <div ng-if="!data.prompts.length">No prompts to display.</div>
+</div>
+]]></template>
     </sp_widget>
 </record_update>
